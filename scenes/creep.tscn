@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://br7dw0xqmb7o3"]
+
+[ext_resource type="Texture2D" uid="uid://csfyha0jrjgn0" path="res://assets/sunny-land/Sunny Land Collection Files/Assets/Characters/Enemies and NPC/Dog/Spritesheets/dog-idle.png" id="1_5eihe"]
+[ext_resource type="Script" uid="uid://dqu8hv6dd4htu" path="res://scripts/creep.gd" id="1_hkahe"]
+[ext_resource type="Texture2D" uid="uid://benm44e0gbneh" path="res://assets/sunny-land/Sunny Land Collection Files/Assets/Characters/Enemies and NPC/Dog/Spritesheets/dog.png" id="2_hkahe"]
+[ext_resource type="PackedScene" uid="uid://d3bm0qrumggu8" path="res://scenes/killzone.tscn" id="3_v7rvr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_it1s1"]
+atlas = ExtResource("1_5eihe")
+region = Rect2(0, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki6dp"]
+atlas = ExtResource("1_5eihe")
+region = Rect2(33, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58mtf"]
+atlas = ExtResource("1_5eihe")
+region = Rect2(66, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlps3"]
+atlas = ExtResource("1_5eihe")
+region = Rect2(99, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeu5m"]
+atlas = ExtResource("1_5eihe")
+region = Rect2(132, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4d4t"]
+atlas = ExtResource("1_5eihe")
+region = Rect2(165, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j4ju"]
+atlas = ExtResource("2_hkahe")
+region = Rect2(0, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86nm4"]
+atlas = ExtResource("2_hkahe")
+region = Rect2(33, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iywr2"]
+atlas = ExtResource("2_hkahe")
+region = Rect2(66, 0, 33, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogvej"]
+atlas = ExtResource("2_hkahe")
+region = Rect2(99, 0, 33, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13ylu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_it1s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ki6dp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58mtf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlps3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jeu5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4d4t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j4ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86nm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iywr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogvej")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2fbcy"]
+
+[node name="creep" type="Node2D"]
+script = ExtResource("1_hkahe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -13)
+sprite_frames = SubResource("SpriteFrames_13ylu")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.57336426
+
+[node name="killzone" parent="." instance=ExtResource("3_v7rvr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(-1, -8)
+shape = SubResource("CircleShape2D_2fbcy")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+target_position = Vector2(-13, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+target_position = Vector2(10, 0)
